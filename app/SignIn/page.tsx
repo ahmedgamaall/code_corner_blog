@@ -5,7 +5,7 @@ import HeroSection from "../components/HeroSection";
 import NavBar from "../components/NavBar";
 import OutlinedButton from "../components/OutlinedButton";
 import TextButton from "../components/TextButton";
-import LoginForm from "./components/LoginForm";
+import SigninForm from "./components/SigninForm";
 
 export default function SignIn() {
   return (
@@ -17,10 +17,10 @@ export default function SignIn() {
           </div>
           <CodeCornerLogo size={20} />
         </div>
-        <LoginForm/>
+        <SigninForm />
         <div className="flex flex-row justify-center space-x-2 items-center pt-20">
           <div className="text-xl text-slate-800">No account?</div>
-          <TextButton title="Create one" />
+          <TextButton title="Create one" href="/signup" />
         </div>
       </div>
     </div>
