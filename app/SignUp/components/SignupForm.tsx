@@ -2,10 +2,12 @@
 
 import FilledButton from "@/app/components/FilledButton";
 import InputField from "@/app/components/InputField";
+import ImageAvatar from "./ImageAvatar";
 
 export default function SignupForm() {
   return (
-    <form className="items-center justify-stretch flex flex-col gap-6 w-96">
+    <form className="items-center justify-stretch flex flex-col gap-2 w-96">
+      <ImageAvatar/>
       <InputField
         placeholder="Full Name"
         onChange={(event) => console.log(event)}
