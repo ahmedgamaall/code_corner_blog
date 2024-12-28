@@ -1,10 +1,16 @@
+'use client';
+import { ChangeEvent } from "react";
+
 type FilledButtonProps = {
   title: string;
-  // onChange: (event: ChangeEvent) => void;
+  onClick?: () => void;
 };
-export default function FilledButton({ title,  }: FilledButtonProps) {
+export default function FilledButton({ title, onClick }: FilledButtonProps) {
   return (
-    <button className="bg-slate-800 rounded-lg px-10 py-2 text-white font-medium">
+    <button
+      className="bg-slate-800 rounded-lg px-10 py-2 text-white font-medium"
+      // onClick={onClick()}
+    >
       {title}
     </button>
   );

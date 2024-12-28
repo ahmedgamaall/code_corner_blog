@@ -4,25 +4,36 @@ import { ChangeEvent } from "react";
 
 type InputFieldProps = {
   placeholder: string;
-  onChange: (event: ChangeEvent) => void;
+  label: string;
+  value: string;
+  type: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function InputField({ placeholder, onChange }: InputFieldProps) {
+export default function InputField({
+  placeholder,
+  label,
+  onChange,
+  type,
+  value,
+}: InputFieldProps) {
   return (
     <div className="flex flex-col w-full space-y-1">
       <label
-        itemID={placeholder}
+        itemID={label}
         className="text-slate-800 text-sm font-medium"
-        htmlFor={placeholder}
+        htmlFor={label}
       >
-        {placeholder}
+        {label}
       </label>
       <input
-        itemID={placeholder}
-        type="text"
+        itemID={label}
+        type={type}
+        value={value}
+        required
         onChange={onChange}
         placeholder={placeholder}
-        className="flex-1 rounded-md px-6 py-2 text-slate-800 border border-slate-800"
+        className="flex-1 rounded-md px-6 py-2 border-none text-slate-800 border focus:border-2 focus:outline-gray-400"
       />
     </div>
   );
