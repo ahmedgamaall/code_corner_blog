@@ -3,13 +3,13 @@
 import FilledButton from "@/app/components/FilledButton";
 import InputField from "@/app/components/InputField";
 import { signIn } from "@/services/auth";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SigninForm() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+const router = useRouter();
   const [loanInputs, setLoanInputs] = useState({
     email: "",
     password: "",
@@ -20,7 +20,7 @@ export default function SigninForm() {
     try {
       await signIn(loanInputs.email, loanInputs.password);
       setErrorMessage(
-        "Account created successfully, Please Verify your email address"
+        "Done"
       );
       setLoading(false);
       router.push("/");

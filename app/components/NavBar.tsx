@@ -6,7 +6,7 @@ import OutlinedButton from "./OutlinedButton";
 export default function NavBar() {
   return (
     <nav className="container bg-white ml-2 mr-2">
-      <div className="row flex justify-between item-center  p-10">
+      <div className="row flex justify-between item-center  p-2">
         <div>
           <CodeCornerLogo />
         </div>
