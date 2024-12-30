@@ -35,7 +35,6 @@ export default function ContactMeBody() {
       <h3 className="font-bold  text-4xl" style={{ color: "#172B4D" }}>
         Send Me Email
       </h3>
-
       <form
         className="items-center flex flex-col gap-2 w-full"
         onSubmit={(event) => {
