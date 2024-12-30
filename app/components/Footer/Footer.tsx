@@ -4,7 +4,10 @@ import IconButton from "./IconButton";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 flex w-full flex-col px-5 py-10">
+    <footer
+      className="flex w-full flex-col px-5 py-10"
+      style={{ backgroundColor: "#172B4D" }}
+    >
       <div className="container flex flex-col  md:flex-row text-white justify-around space-x-8 md:space-y-0">
         <div className="flex flex-col items-center justify-between space-y-8 md:space-y-8 md:items-start">
           <div className="flex flex-col justify-evenly items-start space-y-4">
@@ -20,10 +23,10 @@ export default function Footer() {
             <div>
               Join our newsletter to stay up to date on features and releases.
             </div>
-            <div className="text-xs">
+            <p className="text-xs">
               By Registering you agree to with our Privacy Policy and provide
               consent to receive updates from our company.
-            </div>
+            </p>
           </div>
         </div>
 
@@ -67,7 +70,7 @@ export default function Footer() {
           />
           <IconButton
             href="https://www.linkedin.com/in/ahmed-gamal-aa076b220?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            text="Linked in"
+            text="Linked In"
             icon="ri-linkedin-box-fill"
           />
           <IconButton

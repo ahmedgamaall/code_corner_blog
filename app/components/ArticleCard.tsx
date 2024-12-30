@@ -7,7 +7,12 @@ export default function ArticleCard() {
           alt="Code Corner Banner"
           className="w-200 rounded-s"
         />
-        <h5 className="font-bold text-lg text-slate-900">Ahmed Gamal</h5>
+        <h5
+          className="font-bold text-lg text-slate-900"
+          style={{ color: "#172B4D" }}
+        >
+          Ahmed Gamal
+        </h5>
         <p className="leading-5 text-sm text-slate-700">
           It looks like you're encountering a hydration mismatch error in your
           React application. This can happen for several reasons, as you've

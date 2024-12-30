@@ -8,7 +8,8 @@ type FilledButtonProps = {
 export default function FilledButton({ title, onClick }: FilledButtonProps) {
   return (
     <button
-      className="bg-slate-800 rounded-lg px-10 py-2 text-white font-medium"
+      className="rounded-lg px-10 py-2 text-white font-medium"
+      style={{ backgroundColor: "#172B4D" }}
       // onClick={onClick()}
     >
       {title}

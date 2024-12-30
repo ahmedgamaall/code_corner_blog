@@ -19,19 +19,3 @@ export default function IconButton({href, icon, text}: IconButtonProps) {
     </Link>
   );
 }
-
-
-        //   <div className="flex flex-row justify-between space-x-4">
-        //     <Link href="#">
-        //       <i className="ri-facebook-box-fill"></i>
-        //     </Link>
-        //     <Link href="#">
-        //       <i className="ri-instagram-line"></i>
-        //     </Link>{" "}
-        //     <Link href="#">
-        //       <i className="ri-linkedin-box-fill"></i>
-        //     </Link>{" "}
-        //     <Link href="#">
-        //       <i className="ri-twitter-x-line"></i>
-        //     </Link>
-        //   </div>;

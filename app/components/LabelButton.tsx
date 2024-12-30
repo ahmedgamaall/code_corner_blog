@@ -13,7 +13,12 @@ export default function LabelButton({
 }: LabelButtonProps) {
   return (
     <div className="flex flex-row justify-center space-x-2 items-center">
-      <div className="text-xl text-slate-800">{label}</div>
+      <div
+        className="text-xl"
+        style={{ backgroundColor: "#172B4D" }}
+      >
+        {label}
+      </div>
       <TextButton title={buttonTitle} href={href} />
     </div>
   );

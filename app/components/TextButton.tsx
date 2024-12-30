@@ -8,7 +8,10 @@ type TextButtonProps = {
 export default function TextButton({ title, href }: TextButtonProps) {
   return (
     <Link href={href}>
-      <button className="font-bold text-xl text-slate-800 border-none hover:underline hover:text-orange-600">
+      <button
+        className="font-bold text-xl border-none hover:underline hover:text-orange-600"
+        style={{ color: "#172B4D" }}
+      >
         {title}
       </button>
     </Link>

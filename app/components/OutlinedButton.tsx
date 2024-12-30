@@ -5,7 +5,10 @@ type OutlinedButtonProps = {
 };
 export default function OutlinedButton({ title, padding}: OutlinedButtonProps) {
   return (
-    <button className="bg-transparent border-2 border-slate-800 rounded-lg px-10 py-2 text-slate-800 font-medium">
+    <button
+      className="bg-transparent border-2 rounded-lg px-10 py-2 font-medium"
+      style={{ borderColor: "#172B4D" , color:"#172B4D" ,}}
+    >
       {title}
     </button>
   );

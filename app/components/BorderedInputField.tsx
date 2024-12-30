@@ -2,7 +2,7 @@
 
 import { ChangeEvent } from "react";
 
-type InputFieldProps = {
+type BorderedInputFieldProps = {
   placeholder: string;
   label: string;
   value: string;
@@ -10,13 +10,13 @@ type InputFieldProps = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function InputField({
+export default function BorderedInputField({
   placeholder,
   label,
   onChange,
   type,
   value,
-}: InputFieldProps) {
+}: BorderedInputFieldProps) {
   return (
     <div className="flex flex-col w-full space-y-1">
       <label
@@ -33,7 +33,8 @@ export default function InputField({
         required
         onChange={onChange}
         placeholder={placeholder}
-        className="flex-1 rounded-md px-6 py-2 border-none text-slate-800 border focus:border-2 focus:outline-gray-400"
+        className="flex-1 rounded-md px-6 py-2 border"
+        style={{ borderColor: "#172B4D" , color: "#172B4D" }}
       />
     </div>
   );
