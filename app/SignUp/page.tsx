@@ -1,6 +1,5 @@
 import CodeCornerLogo from "../components/CodeCornerLogo";
 import LabelButton from "../components/LabelButton";
-import TextButton from "../components/TextButton";
 import SignupForm from "./components/SignupForm";
 
 export default function SignUp() {

@@ -1,35 +1,44 @@
 "use client";
 
-import { useRef, useState } from "react";
-import Image from "next/image";
+import { uploadImage } from "@/services/storage";
 import imageCompression from "browser-image-compression";
+import Image from "next/image";
+import { useRef, useState } from "react";
 
-export default function ImageAvatar() {
+type ImageAvatarProps = {
+  getImageUrl: (url: string) => void;
+};
+
+export default function ImageAvatar({ getImageUrl }: ImageAvatarProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
-const handelChangeImage = async (e:any) => {
-  const input = e.target;
-  if (input.files && input.files[0]) {
-    const file = input.files[0];
-    const options = {
-      maxSizeMB: 0.1,
-      maxWidthOrHeight: 800,
-      useWebWorker: true,
-    };
-    try {
-      const compressImage = await imageCompression(file, options);
-      const reader = new FileReader();
-      reader.onload = () => {
-        const imageUrlCompress = reader.result;
-        setImageUrl(imageUrlCompress as string);
+  const handelChangeImage = async (e: any) => {
+    const input = e.target;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const options = {
+        maxSizeMB: 0.1,
+        // maxWidthOrHeight: 800,
+        useWebWorker: true,
       };
-      reader.readAsDataURL(compressImage);
-    } catch (error : any) {
-      console.log(error.message);
+      try {
+        const compressImage = await imageCompression(file, options);
+        const reader = new FileReader();
+        reader.onload = () => {
+          const imageUrlCompress = reader.result;
+          setImageUrl(imageUrlCompress as string);
+        };
+        reader.readAsDataURL(compressImage);
+        const url = await uploadImage(file.name, "users/", compressImage);
+        getImageUrl(url);
+        setUploadedImageUrl(url);
+      } catch (error: any) {
+        console.log(error.message);
+      }
     }
-  }
-};
+  };
   return (
     <div>
       <input

@@ -1,41 +1,24 @@
-// import { db } from "./firebase";
-// import {
-// 	deleteDoc,
-// 	Timestamp,
-// 	addDoc,
-// 	arrayRemove,
-// 	arrayUnion,
-// 	collection,
-// 	deleteField,
-// 	doc,
-// 	serverTimestamp,
-// 	updateDoc,
-// 	writeBatch,
-// } from 'firebase/firestore'
-// import { cookies } from 'next/headers'
-// import { redirect } from 'next/navigation'
+import { UserInformation } from "@/app/types";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "./firebase";
 
-// import posts from '@/data/posts'
-// import { revalidatePath } from 'next/cache'
-
-// const addPost = async formData => {
-// 	const collectionRef = collection(db, 'posts')
-// 	const userId = cookies().get('userId').value
-// 	// const userRef = doc(db, 'users', userId)
-// 	const userRef = doc(db, `users/${userId}`)
-
-// 	const docRef = await addDoc(collectionRef, {
-// 		title: formData.get('title'),
-// 		content: formData.get('content'),
-// 		tags: formData
-// 			.get('tags')
-// 			.split(',')
-// 			.map(tag => tag.trim()),
-// 		user: userRef,
-// 	})
-
-// 	redirect(`/post/${docRef.id}`)
-// }
+export const addUser = async (formData: UserInformation, userUid: string) => {
+  const collectionRef = collection(db, `users/`);
+  
+  // collectionRef.doc(userUid);
+  try {
+    const doc = await addDoc(collectionRef, {
+      userUid: userUid,
+      fullName: formData.fullName,
+      email: formData.email,
+      bio: formData.bio,
+      imageUrl: formData.imageUrl,
+    });
+    return doc;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // const getRandomTimestamp = () => {
 // 	const startTimestamp = new Date('2024-01-01').getTime()

@@ -3,31 +3,36 @@
 import FilledButton from "@/app/components/FilledButton";
 import InputField from "@/app/components/InputField";
 import LabelButton from "@/app/components/LabelButton";
+import { UserInformation } from "@/app/types";
 import { signUp } from "@/services/auth";
-import router from "next/router";
+import { addUser } from "@/services/db";
+import { useRouter }  from "next/navigation";
 import { useState } from "react";
 import ImageAvatar from "./ImageAvatar";
 
 export default function SignupForm() {
+  let userInformation: UserInformation = {
+    fullName: "",
+    email: "",
+    bio: "",  
+    password: "",
+    imageUrl: "",
+  };
   enum registerState {
     waiting,
     loading,
     done,
   }
+  const router = useRouter();
   const [buttonState, setLoading] = useState(registerState.waiting);
   const [errorMessage, setErrorMessage] = useState("");
-  const [loanInputs, setLoanInputs] = useState({
-    fullName: "",
-    email: "",
-    bio: "",
-    password: "",
-    imageUrl: "",
-  });
+  const [loanInputs, setLoanInputs] = useState(userInformation);
 
   const onSubmit = async () => {
     setLoading(registerState.loading);
     try {
-      await signUp(loanInputs.email, loanInputs.password);
+      const user = await signUp(loanInputs.email, loanInputs.password);
+      await addUser(loanInputs, user!.uid);
       setErrorMessage(
         "Account created successfully, Please Verify your email address"
       );
@@ -47,7 +52,11 @@ export default function SignupForm() {
       }}
       className="items-center justify-stretch flex flex-col gap-2 w-96"
     >
-      <ImageAvatar />
+      <ImageAvatar
+        getImageUrl={(url:string) => {
+          setLoanInputs({ ...loanInputs, imageUrl: url });
+        }}
+      />
       <InputField
         label="Full Name"
         type="text"
