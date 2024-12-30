@@ -6,7 +6,7 @@ import LabelButton from "@/app/components/LabelButton";
 import { UserInformation } from "@/app/types";
 import { signUp } from "@/services/auth";
 import { addUser } from "@/services/db";
-import { useRouter }  from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ImageAvatar from "./ImageAvatar";
 
@@ -14,7 +14,7 @@ export default function SignupForm() {
   let userInformation: UserInformation = {
     fullName: "",
     email: "",
-    bio: "",  
+    bio: "",
     password: "",
     imageUrl: "",
   };
@@ -48,12 +48,12 @@ export default function SignupForm() {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit();
+        if (loanInputs.imageUrl !== "") onSubmit();
       }}
       className="items-center justify-stretch flex flex-col gap-2 w-96"
     >
       <ImageAvatar
-        getImageUrl={(url:string) => {
+        getImageUrl={(url: string) => {
           setLoanInputs({ ...loanInputs, imageUrl: url });
         }}
       />
