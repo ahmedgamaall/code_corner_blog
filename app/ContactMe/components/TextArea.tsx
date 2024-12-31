@@ -7,13 +7,15 @@ type TextAreaProps = {
   label: string;
   value: string;
   type: string;
-  lines:number;
+  lines: number;
+  name: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export default function TextArea({
   placeholder,
   label,
+  name,
   onChange,
   type,
   lines=8,
@@ -34,6 +36,7 @@ export default function TextArea({
         required
         onChange={onChange}
         rows={lines}
+        name={name}
         placeholder={placeholder}
         className="flex-1 rounded-md px-6 py-2 border"
         style={{ borderColor: "#172B4D", color: "#172B4D" }}

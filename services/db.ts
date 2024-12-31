@@ -13,6 +13,7 @@ export const addUser = async (formData: UserInformation, userUid: string) => {
       email: formData.email,
       bio: formData.bio,
       imageUrl: formData.imageUrl,
+      jobTitle: formData.jobTitle,
     });
     return doc;
   } catch (error) {

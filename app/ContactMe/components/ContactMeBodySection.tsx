@@ -11,24 +11,9 @@ export default function ContactMeBodySection() {
   const [loanInputs, setLoanInputs] = useState({
     email: "",
     fullName: "",
-    headline: "",
     details: "",
+    headline:"",
   });
-
-  const onSubmit = async () => {
-    setLoading(true);
-    // try {
-    //   const user = await signUp(loanInputs.email, loanInputs.password);
-    //   await addUser(loanInputs, user!.uid);
-    //   setErrorMessage(
-    //     "Account created successfully, Please Verify your email address"
-    //   );
-    //   setLoading(false);
-    // } catch (error: any) {
-    //   setErrorMessage(error.message);
-    //   setLoading(false);
-    // }
-  };
 
   return (
     <div className="w-full flex flex-col justify-center items-start py-2 space-y-4 px-80">
@@ -37,14 +22,18 @@ export default function ContactMeBodySection() {
       </h3>
       <form
         className="items-center flex flex-col gap-2 w-full"
-        onSubmit={(event) => {
-          event.preventDefault();
-          onSubmit();
-        }}
+        action="https://api.web3forms.com/submit"
+        method="POST"
       >
+        <input
+          type="hidden"
+          name="access_key"
+          value="710f6419-b662-494f-bc9b-7f6f1e1af288"
+        />
         <BorderedInputField
           label="Your Name"
           type="text"
+          name="name"
           value={loanInputs.fullName}
           placeholder="Enter your full name"
           onChange={(event) =>
@@ -54,6 +43,7 @@ export default function ContactMeBodySection() {
         <BorderedInputField
           label="Your Email"
           value={loanInputs.email}
+          name="email"
           placeholder="Enter your email address"
           type="email"
           onChange={(event) =>
@@ -63,6 +53,7 @@ export default function ContactMeBodySection() {
         <BorderedInputField
           label="Headline"
           type="text"
+          name="subject"
           value={loanInputs.headline}
           placeholder="Enter your headline"
           onChange={(event) =>
@@ -72,11 +63,19 @@ export default function ContactMeBodySection() {
         <TextArea
           label="Details about Query"
           type="text"
+          name="message"
+          lines={8}
           value={loanInputs.details}
           placeholder="Enter your query"
           onChange={(event) =>
             setLoanInputs({ ...loanInputs, details: event.target.value })
           }
+        />
+        <input
+          type="checkbox"
+          name="botcheck"
+          className="hidden"
+          style={{ display: "none" }}
         />
         <div className="pt-5">
           {!loading ? (
