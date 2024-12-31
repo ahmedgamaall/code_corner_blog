@@ -65,7 +65,7 @@ export default function Footer() {
           />
           <IconButton
             href="https://twitter.com/GamalGa66055643?t=0zYxc3rEbbINqqUh-X1DsA&s=09"
-            text="X"
+            text="Twitter"
             icon="ri-twitter-x-line"
           />
           <IconButton
