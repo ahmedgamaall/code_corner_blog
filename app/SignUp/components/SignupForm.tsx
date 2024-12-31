@@ -3,7 +3,6 @@
 import FilledButton from "@/app/components/FilledButton";
 import InputField from "@/app/components/InputField";
 import LabelButton from "@/app/components/LabelButton";
-import { UserInformation } from "@/app/types";
 import { signUp } from "@/services/auth";
 import { addUser } from "@/services/db";
 import { useRouter } from "next/navigation";
@@ -11,13 +10,6 @@ import { useState } from "react";
 import AvatarImage from "./AvatarImage";
 
 export default function SignupForm() {
-  let userInformation: UserInformation = {
-    fullName: "",
-    email: "",
-    bio: "",
-    password: "",
-    imageUrl: "",
-  };
   enum registerState {
     waiting,
     loading,
@@ -26,7 +18,14 @@ export default function SignupForm() {
   const router = useRouter();
   const [buttonState, setLoading] = useState(registerState.waiting);
   const [errorMessage, setErrorMessage] = useState("");
-  const [loanInputs, setLoanInputs] = useState(userInformation);
+  const [loanInputs, setLoanInputs] = useState({
+    fullName: "",
+    email: "",
+    bio: "",
+    password: "",
+    imageUrl: "",
+    jobTitle: "",
+  });
 
   const onSubmit = async () => {
     setLoading(registerState.loading);
@@ -64,6 +63,15 @@ export default function SignupForm() {
         placeholder="Enter your full name"
         onChange={(event) =>
           setLoanInputs({ ...loanInputs, fullName: event.target.value })
+        }
+      />
+      <InputField
+        label="Job title"
+        value={loanInputs.password}
+        type="job title"
+        placeholder="Enter your job title"
+        onChange={(event) =>
+          setLoanInputs({ ...loanInputs, jobTitle: event.target.value })
         }
       />
       <InputField

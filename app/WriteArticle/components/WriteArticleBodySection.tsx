@@ -34,7 +34,7 @@ export default function WriteArticleBodySection() {
   return (
     <div className="w-full flex flex-col justify-center items-start py-2 space-y-4 px-40">
       <h3 className="font-bold  text-4xl" style={{ color: "#172B4D" }}>
-        Post Article
+        Write Article
       </h3>
       <form
         className="items-center flex flex-col gap-2 w-full justify-stretch"
@@ -94,7 +94,7 @@ export default function WriteArticleBodySection() {
         />
         <div className="pt-5">
           {!loading ? (
-            <FilledButton title="Send" />
+            <FilledButton title="Post" />
           ) : (
             <div className="mx-auto h-20 w-20 object-cover bg-slate-600">
               Loading
