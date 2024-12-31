@@ -5,11 +5,11 @@ import imageCompression from "browser-image-compression";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-type ImageAvatarProps = {
+type AvatarImageProps = {
   getImageUrl: (url: string) => void;
 };
 
-export default function ImageAvatar({ getImageUrl }: ImageAvatarProps) {
+export default function AvatarImage({ getImageUrl }: AvatarImageProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imageUrl, setImageUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");

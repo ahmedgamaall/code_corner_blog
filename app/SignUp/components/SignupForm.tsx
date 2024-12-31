@@ -8,7 +8,7 @@ import { signUp } from "@/services/auth";
 import { addUser } from "@/services/db";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import ImageAvatar from "./ImageAvatar";
+import AvatarImage from "./AvatarImage";
 
 export default function SignupForm() {
   let userInformation: UserInformation = {
@@ -52,7 +52,7 @@ export default function SignupForm() {
       }}
       className="items-center justify-stretch flex flex-col gap-2 w-96"
     >
-      <ImageAvatar
+      <AvatarImage
         getImageUrl={(url: string) => {
           setLoanInputs({ ...loanInputs, imageUrl: url });
         }}

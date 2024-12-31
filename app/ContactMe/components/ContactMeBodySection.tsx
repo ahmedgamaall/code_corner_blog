@@ -1,11 +1,11 @@
 "use client";
 
 import BorderedInputField from "@/app/components/BorderedInputField";
+import FilledButton from "@/app/components/FilledButton";
 import { useState } from "react";
 import TextArea from "./TextArea";
-import FilledButton from "@/app/components/FilledButton";
 
-export default function ContactMeBody() {
+export default function ContactMeBodySection() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loanInputs, setLoanInputs] = useState({
@@ -52,7 +52,7 @@ export default function ContactMeBody() {
           }
         />
         <BorderedInputField
-          label="Your Name"
+          label="Your Email"
           value={loanInputs.email}
           placeholder="Enter your email address"
           type="email"

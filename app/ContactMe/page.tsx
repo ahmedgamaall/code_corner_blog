@@ -1,6 +1,6 @@
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/NavBar";
-import ContactMeBody from "./components/ContactMeBody";
+import ContactMeBodySection from "./components/ContactMeBodySection";
 import ContactMeHeroSection from "./components/ContactMeHeroSection";
 import SocialMediaLinks from "./components/SocialMediaLinks";
 
@@ -13,8 +13,8 @@ export default function ContactMe() {
         You can reach out to me via email or social media platforms to discuss
         the query.
       </h5>
-      <ContactMeBody />
-      <SocialMediaLinks/>
+      <ContactMeBodySection />
+      <SocialMediaLinks />
       <Footer />
     </div>
   );
