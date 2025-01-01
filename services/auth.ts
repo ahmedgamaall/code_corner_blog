@@ -46,9 +46,9 @@ export const logOut = async () => {
   }
 };
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid;
-  } else {
-  }
-});
+export const onAuthStateChange = () => {
+  onAuthStateChanged(auth, (user) => {
+    return user;
+  });
+  return null;
+};

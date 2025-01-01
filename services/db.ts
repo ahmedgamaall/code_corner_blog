@@ -1,11 +1,19 @@
-import { UserInformation } from "@/app/types";
-import { addDoc, collection } from "firebase/firestore";
+import { Article, Tag, UserInformation } from "@/app/types";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "./firebase";
 
 export const addUser = async (formData: UserInformation, userUid: string) => {
-  const collectionRef = collection(db, `users/`);
-  
-  // collectionRef.doc(userUid);
+  const collectionRef = collection(db, "users/");
   try {
     const doc = await addDoc(collectionRef, {
       userUid: userUid,
@@ -21,62 +29,94 @@ export const addUser = async (formData: UserInformation, userUid: string) => {
   }
 };
 
-// const getRandomTimestamp = () => {
-// 	const startTimestamp = new Date('2024-01-01').getTime()
-// 	const endTimestamp = new Date().getTime()
-// 	const randomTimestamp = Math.floor(
-// 		Math.random() * (endTimestamp - startTimestamp + 1) + startTimestamp,
-// 	)
-// 	const randomDate = new Date(randomTimestamp)
+export const updateUser = async (
+  formData: UserInformation,
+  userUid: string
+) => {
+  const docRef = doc(db, "users", userUid);
+  try {
+    await updateDoc(docRef, {
+      fullName: formData.fullName,
+      bio: formData.bio,
+      imageUrl: formData.imageUrl,
+      jobTitle: formData.jobTitle,
+    });
+    return doc;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// 	return Timestamp.fromDate(randomDate)
-// }
+export const addArticle = async (article: Article, userUid: string) => {
+  const collectionRef = collection(db, "articles/");
+  try {
+    const document = await addDoc(collectionRef, {
+      title: article.title,
+      description: article.description,
+      content: article.content,
+      timeToRead: article.timeToRead,
+      tags: article.tags,
+      likes: [],
+      category: article.category,
+      coverImage: article.coverImage,
+      createdAt: Date.now(),
+      authorName: article.authorName,
+      authorJobTitle: article.authorJobTitle,
+      authorUid: article.authorUid,
+    });
+    await updateDoc(doc(db, "articles", document.id), {
+      articleDocId: document.id,
+    });
+    return document;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// const addMultiplePosts = async () => {
-// 	const batch = writeBatch(db)
+export const addTag = async (tag: Tag) => {
+  const collectionRef = collection(db, "tags/");
+  try {
+    const document = await addDoc(collectionRef, {
+      title: tag.title,
+    });
+    await updateDoc(doc(db, "tags", document.id), {
+      tagDocId: document.id,
+    });
+    return document;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// 	const user1Ref = doc(db, 'users', 'BuIYJce615lrfcdfpo9i')
-// 	const user2Ref = doc(db, 'users', '7F9HiUVFDzWXtGC0r1Nd')
+export const deleteArticle = async (articleId: string) => {
+  const docRef = doc(db, "posts", articleId);
+  try {
+    const result = await deleteDoc(docRef);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// 	const users = [user1Ref, user2Ref]
-// 	const getRandomUser = () => users[Math.floor(Math.random() * users.length)]
+export const getArticles = async () => {
+  const collectionRef = collection(db, "articles");
+  try {
+    const documents = await getDocs(collectionRef);
+    const articles = documents.docs.map((doc) => { return doc.data()});
+    return articles;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-// 	posts.forEach((post) => {
-// 		const postData = {
-// 			...post,
-// 			user: getRandomUser(),
-// 			createdAt: getRandomTimestamp(),
-// 		}
-
-// 		const docRef = doc(collection(db, 'posts'))
-// 		batch.set(docRef, postData)
-// 	})
-
-// 	await batch.commit()
-// }
-
-// const updatePost = async (postId : string, formData) => {
-// 	const docRef = doc(db, 'posts', postId)
-
-// 	await updateDoc(docRef, {
-// 		title: formData.get('title'),
-// 		content: deleteField(),
-// 		// content: formData.get('content'),
-// 		tags: formData
-// 			.get('tags')
-// 			.split(',')
-// 			.map((tag:string) => tag.trim()),
-// 		// tags: arrayUnion('new-tag'),
-// 		// tags: arrayRemove('new-tag'),
-// 	})
-
-// 	revalidatePath(`/post/${postId}`)
-// }
-
-// const deletePost = async (postId:string) => {
-// 	const docRef = doc(db, 'posts', postId)
-// 	await deleteDoc(docRef)
-// 	redirect('/')
-// }
-
-// export { addPost, addMultiplePosts, updatePost, deletePost }
+export const search = async (q: string) => {
+  const collectionRef = collection(db, "articles");
+  const searchResult = query(collectionRef, where("title", "==", q));
+  try {
+    const documents = await getDocs(searchResult);
+    const articles = documents.docs.map((doc) => { return doc.data()});
+    return articles;
+  } catch (error) {
+    console.error(error);
+  }
+};
