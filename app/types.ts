@@ -13,19 +13,14 @@ export type Article = {
   description: string;
   content: string;
   timeToRead: string;
-  tags: Tag[];
+  tags?: string[];
   likes?: string[];
-  category: Category;
+  category?: string;
   coverImage: string;
-  createdAt?: Date;
+  createdAt?: number;
   authorName: string;
   authorJobTitle: string;
   authorUid: string;
-};
-
-export type Tag = {
-  tagDocId?: string;
-  title: string;
 };
 
 export type Category = {

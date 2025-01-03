@@ -1,34 +1,72 @@
 "use client";
 
 import BorderedInputField from "@/app/components/BorderedInputField";
-import { useState } from "react";
 import FilledButton from "@/app/components/FilledButton";
 import TextArea from "@/app/contactme/components/TextArea";
+import { Article } from "@/app/types";
+import { onAuthStateChange } from "@/services/auth";
+import { addArticle, getUser } from "@/services/db";
+import { User } from "firebase/auth";
+import { DocumentData } from "firebase/firestore";
+import { useState } from "react";
 import ArticleImage from "./ArticleImage";
+import SelectCategory from "./SelectCategory";
+import TagsList from "./TagsList";
 
 export default function WriteArticleBodySection() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [loanInputs, setLoanInputs] = useState({
-    email: "",
-    fullName: "",
-    headline: "",
-    details: "",
-  });
+  const initTags: string[] = [];
+  const [tagsList, setTagsList] = useState(initTags);
+
+  const handleSelect = (event: any) => {
+    const value: string = event.target.value;
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setTagsList([...tagsList, value]);
+    } else {
+      const filteredList = tagsList.filter((item) => item != value);
+      setTagsList(filteredList);
+    }
+  };
+
+  const article: Article = {
+    title: "",
+    description: "",
+    content: "",
+    timeToRead: "",
+    tags: tagsList,
+    likes: [],
+    category: "",
+    createdAt: Date.now(),
+    coverImage: "",
+    authorName: "",
+    authorJobTitle: "",
+    authorUid: "",
+  };
+  const [formInputs, setFormInputs] = useState(article);
 
   const onSubmit = async () => {
     setLoading(true);
-    // try {
-    //   const user = await signUp(loanInputs.email, loanInputs.password);
-    //   await addUser(loanInputs, user!.uid);
-    //   setErrorMessage(
-    //     "Account created successfully, Please Verify your email address"
-    //   );
-    //   setLoading(false);
-    // } catch (error: any) {
-    //   setErrorMessage(error.message);
-    //   setLoading(false);
-    // }
+    try {
+      const user: User | null = await onAuthStateChange();
+      const userInfo: DocumentData  = await getUser(user!.uid);
+      setFormInputs({
+        ...formInputs,
+        authorName: userInfo.fullName,
+        authorJobTitle: userInfo.jobTitle,
+        authorUid: user!.uid,
+      });
+      const article = await addArticle(formInputs);
+
+      setErrorMessage(
+        "Account created successfully, Please Verify your email address"
+      );
+      setLoading(false);
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,50 +84,47 @@ export default function WriteArticleBodySection() {
         <BorderedInputField
           label="Title"
           type="text"
-          value={loanInputs.fullName}
+          value={formInputs.title}
           placeholder="Enter article title"
           onChange={(event) =>
-            setLoanInputs({ ...loanInputs, fullName: event.target.value })
+            setFormInputs({ ...formInputs, title: event.target.value })
           }
         />
         <div className="flex flex-row justify-between space-x-8 w-full">
-          <BorderedInputField
+          <SelectCategory
             label="Choose Category"
-            value={loanInputs.email}
-            placeholder="Enter article "
-            type="email"
+            value={formInputs.category!}
             onChange={(event) =>
-              setLoanInputs({ ...loanInputs, email: event.target.value })
-            }
-          />
-          <BorderedInputField
-            label="Choose Tags"
-            type="text"
-            value={loanInputs.headline}
-            placeholder="Enter your headline"
-            onChange={(event) =>
-              setLoanInputs({ ...loanInputs, headline: event.target.value })
+              setFormInputs({ ...formInputs, category: event.target.value })
             }
           />
           <BorderedInputField
             label="Time to read"
             type="text"
-            value={loanInputs.headline}
+            value={formInputs.timeToRead}
             placeholder="Enter your headline"
             onChange={(event) =>
-              setLoanInputs({ ...loanInputs, headline: event.target.value })
+              setFormInputs({ ...formInputs, timeToRead: event.target.value })
             }
           />
         </div>
-        <ArticleImage getImageUrl={(e) => {}} />
+        <TagsList onChange={handleSelect} />
+        <ArticleImage
+          getImageUrl={(url) => {
+            setFormInputs({
+              ...formInputs,
+              coverImage: url,
+            });
+          }}
+        />
         <TextArea
           label="Content"
           type="text"
           lines={20}
-          value={loanInputs.details}
+          value={formInputs.content}
           placeholder="Enter article content"
           onChange={(event) =>
-            setLoanInputs({ ...loanInputs, details: event.target.value })
+            setFormInputs({ ...formInputs, content: event.target.value })
           }
         />
         <div className="pt-5">

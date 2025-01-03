@@ -1,15 +1,22 @@
+import { getCategories } from "@/services/db";
 import CategoryCard from "./CategoryCard";
 
-export default function CategoryGrid() {
+export default async function CategoryGrid() {
+      const categories = await getCategories();
+  
+      const categoriesComponent = categories.map((category) => {
+        return (
+          <CategoryCard
+            categoryDocId={category.categoryDocId}
+            logo={category.logo}
+            title={category.title}
+          />
+        );
+      });
+      
   return (
-    <div className="px-10 py-10 grid grid-cols-4 space-x-8 space-y-8 w-full">
-      <CategoryCard logo="/code_corner_logo.svg" title="Flutter" />
-      <CategoryCard logo="/code_corner_logo.svg" title="Flutter" />
-      <CategoryCard logo="/code_corner_logo.svg" title="Flutter" />
-      <CategoryCard logo="/code_corner_logo.svg" title="Flutter" />
-      <CategoryCard logo="/code_corner_logo.svg" title="Flutter" />
-      <CategoryCard logo="/code_corner_logo.svg" title="Flutter" />
-      <CategoryCard logo="/code_corner_logo.svg" title="Flutter" />
+    <div className="grid grid-cols-4 gap-8 pt-10 px-20 pb-20">
+      {categoriesComponent}
     </div>
   );
 }

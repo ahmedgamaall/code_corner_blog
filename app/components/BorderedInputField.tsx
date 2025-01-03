@@ -7,7 +7,7 @@ type BorderedInputFieldProps = {
   label: string;
   value: string;
   type: string;
-  name: string;
+  name?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -22,14 +22,14 @@ export default function BorderedInputField({
   return (
     <div className="flex flex-col w-full space-y-1">
       <label
-        itemID={label}
+        id={label}
         className="text-slate-800 text-xl font-medium"
         htmlFor={label}
       >
         {label}
       </label>
       <input
-        itemID={label}
+        id={label}
         type={type}
         value={value}
         required

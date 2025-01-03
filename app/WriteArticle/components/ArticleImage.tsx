@@ -3,7 +3,7 @@
 import { uploadImage } from "@/services/storage";
 import imageCompression from "browser-image-compression";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useRef, useState } from "react";
 
 type ArticleImageProps = {
   getImageUrl: (url: string) => void;
@@ -14,13 +14,13 @@ export default function ArticleImage({ getImageUrl }: ArticleImageProps) {
   const [imageUrl, setImageUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
-  const handelChangeImage = async (e: any) => {
+  const handelChangeImage = async (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
     if (input.files && input.files[0]) {
       const file = input.files[0];
       const options = {
         maxSizeMB: 0.1,
-        // maxWidthOrHeight: 800,
+        maxWidthOrHeight: 800,
         useWebWorker: true,
       };
       try {

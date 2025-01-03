@@ -5,10 +5,11 @@ import CategoryGrid from "./components/CategoryGrid";
 
 export default function Categories() {
   return (
-  <div className="flex flex-col w-full items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
-    <NavBar/>
-    <CategoriesHeroSection />
-    <CategoryGrid/>
-    <Footer/>
-    </div>  );
+    <div className="flex flex-col w-full items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
+      <NavBar />
+      <CategoriesHeroSection />
+      <CategoryGrid />
+      <Footer />
+    </div>
+  );
 }

@@ -8,7 +8,7 @@ type TextAreaProps = {
   value: string;
   type: string;
   lines: number;
-  name: string;
+  name?: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 

@@ -1,4 +1,4 @@
-import { Article, Tag, UserInformation } from "@/app/types";
+import { Article, UserInformation } from "@/app/types";
 import {
   addDoc,
   collection,
@@ -29,6 +29,16 @@ export const addUser = async (formData: UserInformation, userUid: string) => {
   }
 };
 
+export const getUser = async (userUid: string) => {
+  const docRef = doc(db, "users", userUid);
+  try {
+    const document = await getDoc(docRef);
+    return document.data();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const updateUser = async (
   formData: UserInformation,
   userUid: string
@@ -47,7 +57,7 @@ export const updateUser = async (
   }
 };
 
-export const addArticle = async (article: Article, userUid: string) => {
+export const addArticle = async (article: Article) => {
   const collectionRef = collection(db, "articles/");
   try {
     const document = await addDoc(collectionRef, {
@@ -66,21 +76,6 @@ export const addArticle = async (article: Article, userUid: string) => {
     });
     await updateDoc(doc(db, "articles", document.id), {
       articleDocId: document.id,
-    });
-    return document;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const addTag = async (tag: Tag) => {
-  const collectionRef = collection(db, "tags/");
-  try {
-    const document = await addDoc(collectionRef, {
-      title: tag.title,
-    });
-    await updateDoc(doc(db, "tags", document.id), {
-      tagDocId: document.id,
     });
     return document;
   } catch (error) {
@@ -109,6 +104,42 @@ export const getArticles = async () => {
   }
 }
 
+export const getCategories = async () => {
+  const collectionRef = collection(db, "categories");
+  try {
+    const documents = await getDocs(collectionRef);
+    const categories = documents.docs.map((doc) => {
+      return doc.data();
+    });
+    return categories;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getCategory = async (categoryDocId:string) => {
+  const collectionRef = collection(db, "categories");
+  try {
+    const document = await getDoc(doc(collectionRef, categoryDocId));
+    return document.data();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getTags = async () => {
+  const collectionRef = collection(db, "tags");
+  try {
+    const documents = await getDocs(collectionRef);
+    const tags = documents.docs.map((doc) => {
+      return doc.data();
+    });
+    return tags;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const search = async (q: string) => {
   const collectionRef = collection(db, "articles");
   const searchResult = query(collectionRef, where("title", "==", q));
@@ -116,6 +147,44 @@ export const search = async (q: string) => {
     const documents = await getDocs(searchResult);
     const articles = documents.docs.map((doc) => { return doc.data()});
     return articles;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getArticlesByTag = async (q: string) => {
+  const collectionRef = collection(db, "articles");
+  const searchResult = query(collectionRef, where("tag", "==", q));
+  try {
+    const documents = await getDocs(searchResult);
+    const articles = documents.docs.map((doc) => {
+      return doc.data();
+    });
+    return articles;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getArticlesByCategory = async (q: any) => {
+  const collectionRef = collection(db, "articles");
+  const searchResult = query(collectionRef, where("category", "==", q));
+  try {
+    const documents = await getDocs(searchResult);
+    const articles = documents.docs.map((doc) => {
+      return doc.data();
+    });
+    return articles;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getArticleByDocID = async (articleId: string) => {
+  const docRef = doc(db, "articles", articleId);
+  try {
+    const document = await getDoc(docRef);
+    return document.data();
   } catch (error) {
     console.error(error);
   }

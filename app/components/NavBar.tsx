@@ -58,12 +58,24 @@ export default function NavBar() {
           <NavBarButton href="/search">Search</NavBarButton>
           <NavBarButton href="/aboutme">About Me</NavBarButton>
           <NavBarButton href="/contactme">Contact Me</NavBarButton>
-          <button className="py-2 px-6 mx-6 rounded-full bg-slate-500 hover:bg-orange-600 text-white">
-            Sign in
-          </button>
-          <button className="py-2 px-6 mx-6 rounded-full bg-slate-500 hover:bg-orange-600 text-white">
-            Sign up
-          </button>
+          {isUserLoggedIn ? (
+            <OutlinedButton title="Sign in" href="/signin"></OutlinedButton>
+          ) : (
+            <OutlinedButton
+              title="Post Article"
+              href="/writearticle"
+            ></OutlinedButton>
+          )}
+          {isUserLoggedIn ? (
+            <FilledButton title="Sign up" href="/signup"></FilledButton>
+          ) : (
+            <FilledButton
+              title="Sign out"
+              onClick={() => {
+                logOut();
+              }}
+            ></FilledButton>
+          )}
         </div>
       </div>
     </nav>
