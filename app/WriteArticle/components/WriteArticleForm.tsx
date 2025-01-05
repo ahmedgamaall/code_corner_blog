@@ -2,16 +2,16 @@
 
 import BorderedInputField from "@/app/components/BorderedInputField";
 import FilledSubmitButton from "@/app/components/FilledSubmitButton";
-import TextArea from "@/app/contactme/components/TextArea";
+import TextArea from "@/app/components/TextArea";
 import { Article } from "@/app/types";
 import { addArticle, getUser } from "@/services/db";
+import { Timestamp } from "firebase/firestore";
 import { useState } from "react";
+import Dialog from "../../components/Dialog";
+import LoadingBlock from "../../components/LoadingBlock";
 import ArticleImage from "./ArticleImage";
-import Dialog from "./Dialog";
 import SelectCategory from "./SelectCategory";
 import TagsList from "./TagsList";
-import LoadingBlock from "./LoadingBlock";
-import { Timestamp } from "firebase/firestore";
 
 type WriteArticleFormProps = {
   categories: any;
@@ -38,7 +38,7 @@ export default function WriteArticleForm({
     authorName: "",
     authorJobTitle: "",
     authorUid: "",
-    authorImage:"",
+    authorImage: "",
   };
   const [formInputs, setFormInputs] = useState(article);
 
@@ -64,7 +64,7 @@ export default function WriteArticleForm({
         ...formInputs,
         authorName: userInfo.fullName,
         authorJobTitle: userInfo.jobTitle,
-        authorImage:userInfo.imageUrl,
+        authorImage: userInfo.imageUrl,
         authorUid: uid ?? "",
       });
       const article = await addArticle(formInputs);

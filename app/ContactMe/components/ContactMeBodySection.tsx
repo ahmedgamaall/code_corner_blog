@@ -3,7 +3,7 @@
 import BorderedInputField from "@/app/components/BorderedInputField";
 import FilledButton from "@/app/components/FilledButton";
 import { useState } from "react";
-import TextArea from "./TextArea";
+import TextArea from "../../components/TextArea";
 
 export default function ContactMeBodySection() {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export default function ContactMeBodySection() {
     email: "",
     fullName: "",
     details: "",
-    headline:"",
+    headline: "",
   });
 
   return (

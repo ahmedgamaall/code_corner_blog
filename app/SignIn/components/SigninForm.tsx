@@ -1,9 +1,9 @@
 "use client";
 
+import Dialog from "@/app/components/Dialog";
 import FilledSubmitButton from "@/app/components/FilledSubmitButton";
 import InputField from "@/app/components/InputField";
-import Dialog from "@/app/writearticle/components/Dialog";
-import LoadingBlock from "@/app/writearticle/components/LoadingBlock";
+import LoadingBlock from "@/app/components/LoadingBlock";
 import { signIn } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

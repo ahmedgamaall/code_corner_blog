@@ -1,10 +1,10 @@
 "use client";
 
+import Dialog from "@/app/components/Dialog";
 import FilledSubmitButton from "@/app/components/FilledSubmitButton";
 import InputField from "@/app/components/InputField";
 import LabelButton from "@/app/components/LabelButton";
-import Dialog from "@/app/writearticle/components/Dialog";
-import LoadingBlock from "@/app/writearticle/components/LoadingBlock";
+import LoadingBlock from "@/app/components/LoadingBlock";
 import { signUp } from "@/services/auth";
 import { addUser } from "@/services/db";
 import { useRouter } from "next/navigation";
