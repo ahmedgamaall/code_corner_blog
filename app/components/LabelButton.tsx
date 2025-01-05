@@ -15,7 +15,7 @@ export default function LabelButton({
     <div className="flex flex-row justify-center space-x-2 items-center">
       <div
         className="text-xl"
-        style={{ backgroundColor: "#172B4D" }}
+        style={{ color: "#172B4D" }}
       >
         {label}
       </div>

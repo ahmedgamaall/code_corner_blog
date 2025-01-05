@@ -1,14 +1,30 @@
-import { getTags } from "@/services/db";
-import { ChangeEvent } from "react";
+"use client";
+import { ChangeEvent, useState } from "react";
 
 type TagsListProps = {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (tags:any) => void;
+  tags:any;
 };
 
-export default async function TagsList({ onChange }: TagsListProps) {
-  const tags = await getTags();
+export default function TagsList({ onChange, tags }: TagsListProps) {
+    const initTags: string[] = [];
+    const [tagsList, setTagsList] = useState(initTags);
+  
+    const handleSelect = (event: any) => {
+      const value: string = event.target.value;
+      console.log(value);
+      const isChecked = event.target.checked;
+      if (isChecked) {
+        setTagsList([...tagsList, value]);
+        onChange(tagsList);
+      } else {
+        const filteredList = tagsList.filter((item) => item != value);
+        setTagsList(filteredList);
+        onChange(tagsList);
+      }
+    };
 
-  const tagsComponent = tags.map((tag) => {
+  const tagsComponent = tags.map((tag:any) => {
     return (
       <div
         key={tag.title}
@@ -18,7 +34,7 @@ export default async function TagsList({ onChange }: TagsListProps) {
           id={tag.title}
           type="checkbox"
           value={tag.title}
-          onChange={onChange}
+          onChange={handleSelect}
           placeholder={tag.title}
           className="flex-1 rounded-md px-2 py-3 border"
           style={{ borderColor: "#172B4D", color: "#172B4D" }}
@@ -40,7 +56,9 @@ export default async function TagsList({ onChange }: TagsListProps) {
       style={{ color: "#172B4D" }}
     >
       Choose Tags
-      <div className="flex flex-wrap gap-2 w-full space-x-0 mt-2">{tagsComponent}</div>
+      <div className="flex flex-wrap gap-2 w-full space-x-0 mt-2">
+        {tagsComponent}
+      </div>
     </div>
   );
 }

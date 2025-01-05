@@ -40,7 +40,7 @@ export default function ArticleImage({ getImageUrl }: ArticleImageProps) {
     }
   };
   return (
-    <div>
+    <div className="w-full">
       <input
         ref={fileInputRef}
         type="file"
@@ -51,16 +51,16 @@ export default function ArticleImage({ getImageUrl }: ArticleImageProps) {
         onChange={handelChangeImage}
       />
       <div
-        className="container my-4 rounded-md bg-slate-900 w-full h-1/3 border border-collapse"
+        className="container my-4 rounded-md bg-slate-900 w-full h-2/3 border-2 items-center"
         onClick={() => {
           fileInputRef.current?.click();
         }}
       >
         {imageUrl === "" ? (
-          <div className="p-40 w-full">Upload Article Image</div>
+          <div className="p-40 w-full text-center">Upload Article Image</div>
         ) : (
           <Image
-            className="rounded-md shadow-xl h-96 w-full"
+            className="rounded-md shadow-xl h-96 w-full border border-slate-700"
             src={imageUrl}
             width={400}
             height={200}

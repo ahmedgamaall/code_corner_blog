@@ -1,5 +1,3 @@
-"use client";
-
 import { Category } from "@/app/types";
 import { getCategories } from "@/services/db";
 import { ChangeEvent } from "react";
@@ -8,14 +6,18 @@ type SelectCategoryProps = {
   label: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  categories:any;
 };
 
-export default async function SelectCategory({ label, value, onChange }: SelectCategoryProps) {
-    const categories = await getCategories();
-
-    const categoriesComponent = categories.map((category) => {
-      return <option key={category.categoryDocId}>{category.title}</option>;
-    });
+export default function SelectCategory({
+  label,
+  value,
+  onChange,
+  categories,
+}: SelectCategoryProps) {
+  const categoriesComponent = categories.map((category:any) => {
+    return <option key={category.categoryDocId}>{category.title}</option>;
+  });
 
   return (
     <div className="flex flex-col w-full space-y-1">

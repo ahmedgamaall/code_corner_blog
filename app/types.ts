@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export type UserInformation = {
   fullName: string;
   email: string;
@@ -10,15 +12,15 @@ export type UserInformation = {
 export type Article = {
   articleDocId?: string;
   title: string;
-  description: string;
   content: string;
   timeToRead: string;
   tags?: string[];
   likes?: string[];
   category?: string;
   coverImage: string;
-  createdAt?: number;
+  createdAt?: Timestamp;
   authorName: string;
+  authorImage: string;
   authorJobTitle: string;
   authorUid: string;
 };
@@ -29,3 +31,18 @@ export type Category = {
   description: string;
   logo: string;
 };
+
+export enum NavSelect {
+  home,
+  categories,
+  profile,
+  search,
+  contactMe,
+  aboutMe,
+}
+
+export enum ArticleCardEnum {
+  home,
+  categories,
+  search,
+}

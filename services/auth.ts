@@ -4,6 +4,7 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
+  UserCredential,
 } from "firebase/auth";
 import { auth } from "./firebase";
 
@@ -14,7 +15,8 @@ export const signUp = async (email: string, password: string) => {
       email,
       password
     );
-    sendEmailVerification(userCredential.user);
+    // sendEmailVerification(userCredential.user);
+    localStorage.setItem("uid", userCredential.user!.uid);
     return userCredential.user;
   } catch (error) {
     console.error(error);
@@ -23,15 +25,12 @@ export const signUp = async (email: string, password: string) => {
 
 export const signIn = async (email: string, password: string) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(
+    const userCredential: UserCredential = await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
-    if(userCredential.user.emailVerified === false){
-      await logOut();
-      throw "Please verify your email address";
-    }
+    localStorage.setItem("uid", userCredential.user!.uid);
     return userCredential.user;
   } catch (error) {
     return error;
@@ -46,9 +45,11 @@ export const logOut = async () => {
   }
 };
 
-export const onAuthStateChange = () => {
+export const onAuthStateChange = async () => {
   onAuthStateChanged(auth, (user) => {
-    return user;
+    console.log("user", user?.uid);
+    return user?.uid;
   });
+  console.log("user", "null llll");
   return null;
 };

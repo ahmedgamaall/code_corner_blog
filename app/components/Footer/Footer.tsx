@@ -38,9 +38,9 @@ export default function Footer() {
           <Link href="/categories" className="hover:text-orange-500 font-light">
             Categories
           </Link>
-          <Link href="/profile" className="hover:text-orange-500 font-light">
+          {/* <Link href="/profile" className="hover:text-orange-500 font-light">
             Profile
-          </Link>
+          </Link> */}
           <Link href="/aboutme" className="hover:text-orange-500 font-light">
             About Me
           </Link>

@@ -19,7 +19,7 @@ export default function AboutMe() {
   ];
 
   const softSkillsContent = softSkills.map((skill) => (
-    <li className="text-xl" style={{ color: "#172B4D" }}>
+    <li className="text-xl" key={skill} style={{ color: "#172B4D" }}>
       - {skill}
     </li>
   ));
@@ -35,13 +35,13 @@ export default function AboutMe() {
     "Audio and Video Playback",
   ];
   const technicalSkillsContent = technicalSkills.map((skill) => (
-    <li className="text-xl" style={{ color: "#172B4D" }}>
+    <li className="text-xl" key={skill} style={{ color: "#172B4D" }}>
       - {skill}
     </li>
   ));
   const languages = ["Arabic (Native Language) ", "English - good"];
   const languagesContent = languages.map((language) => (
-    <li className="text-xl" style={{ color: "#172B4D" }}>
+    <li className="text-xl" key={language} style={{ color: "#172B4D" }}>
       - {language}
     </li>
   ));
@@ -56,11 +56,7 @@ export default function AboutMe() {
 Having been a professional runner in the past, I am passionate about sports, particularly swimming and running. This experience has cultivated discipline, perseverance, and a strong work ethic within me.
 I possess excellent communication, public speaking, and critical thinking skills, making me a valuable asset in team-oriented environments. I am eager to apply my skills and knowledge to new challenges."
       />
-      <AboutMeCard
-        image="/AhmedInFrontOfDoor.jpg"
-        title="Projects"
-        direction="right"
-      >
+      <AboutMeCard image="/StoryTime.jpg" title="Projects" direction="right">
         <div>
           <p className="text-xl" style={{ color: "#172B4D" }}>
             Story time web platform: is a Flutter web application that provides
@@ -78,23 +74,32 @@ I possess excellent communication, public speaking, and critical thinking skills
           </Link>
         </div>
       </AboutMeCard>
-      <AboutMeCard image="/Ahmed.jpg" title="Technical Skills">
+      <AboutMeCard image="/TechnicalSkills.jpg" title="Technical Skills">
         <ul>{technicalSkillsContent}</ul>
       </AboutMeCard>
       <AboutMeCard
-        image="/AhmedInFrontOfDoor.jpg"
+        image="/SoftSkills.jpg"
         direction="right"
         title="Soft Skills"
       >
         <ul>{softSkillsContent}</ul>
       </AboutMeCard>
       <AboutMeCard
-        image="/Ahmed.jpg"
+        image="/UniversityOfGezira.jpg"
         title="Education"
         content="Bachelor's Degree, Accounting
                 University of El-Gzira Academy, Qena
                 2013 - 2017"
       />
+      <AboutMeCard image="/certificate.jpg" title="Certifications">
+        <Link
+          href="https://www.udemy.com/certificate/UC-cb40e7df-0c88-4100-862f-ddcd5871374b/"
+          className="text-xl hover:underline hover:text-orange-600"
+          style={{ color: "#172B4D" }}
+        >
+          The Complete 2022 Flutter & Dart Development Course [Arabic]
+        </Link>
+      </AboutMeCard>
       <AboutMeCard
         image="/AhmedInFrontOfDoor.jpg"
         direction="right"
@@ -103,15 +108,6 @@ I possess excellent communication, public speaking, and critical thinking skills
         <div className="w-full">
           <ul>{languagesContent}</ul>
         </div>
-      </AboutMeCard>
-      <AboutMeCard image="/Ahmed.jpg" title="Certifications">
-        <Link
-          href="https://www.udemy.com/certificate/UC-cb40e7df-0c88-4100-862f-ddcd5871374b/"
-          className="text-xl hover:underline hover:text-orange-600"
-          style={{ color: "#172B4D" }}
-        >
-          The Complete 2022 Flutter & Dart Development Course [Arabic]
-        </Link>
       </AboutMeCard>
       <Footer />
     </div>

@@ -13,7 +13,7 @@ export default function FilledButton({ title, onClick, href }: FilledButtonProps
       href={href ?? ""}
       className="rounded-lg px-10 py-2 text-white font-medium"
       style={{ backgroundColor: "#172B4D" }}
-      // onClick={onClick()}
+      onClick={(e)=>{}}
     >
       {title}
     </Link>

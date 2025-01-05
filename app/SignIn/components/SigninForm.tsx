@@ -1,7 +1,9 @@
 "use client";
 
-import FilledButton from "@/app/components/FilledButton";
+import FilledSubmitButton from "@/app/components/FilledSubmitButton";
 import InputField from "@/app/components/InputField";
+import Dialog from "@/app/writearticle/components/Dialog";
+import LoadingBlock from "@/app/writearticle/components/LoadingBlock";
 import { signIn } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -9,7 +11,9 @@ import { useState } from "react";
 export default function SigninForm() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
+
+  const router = useRouter();
   const [loanInputs, setLoanInputs] = useState({
     email: "",
     password: "",
@@ -18,15 +22,14 @@ const router = useRouter();
   const onSubmit = async () => {
     setLoading(true);
     try {
-      await signIn(loanInputs.email, loanInputs.password);
-      setErrorMessage(
-        "Done"
-      );
+      const user = await signIn(loanInputs.email, loanInputs.password);
       setLoading(false);
+      setShowModal(true);
       router.push("/");
     } catch (error: any) {
       setErrorMessage(error.message);
       setLoading(false);
+      setShowModal(true);
     }
   };
 
@@ -56,17 +59,15 @@ const router = useRouter();
           setLoanInputs({ ...loanInputs, password: event.target.value })
         }
       />
-
       <div className="pt-5">
-        {!loading ? (
-          <FilledButton title="Login" />
-        ) : (
-          <div className="mx-auto h-20 w-20 object-cover bg-slate-600">
-            Loading
-          </div>
-        )}
+        {!loading ? <FilledSubmitButton title="Login" /> : <LoadingBlock />}
       </div>
       {errorMessage && <div className="pt-5 text-red-600">{errorMessage}</div>}
+      <Dialog
+        errorMessage={errorMessage}
+        isVisible={showModal}
+        successMessage="The Article Has Been Posted Successfully"
+      />
     </form>
   );
 }

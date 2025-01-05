@@ -4,18 +4,20 @@ import {
   collection,
   deleteDoc,
   doc,
-  updateDoc,
   getDoc,
   getDocs,
   query,
+  setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const addUser = async (formData: UserInformation, userUid: string) => {
   const collectionRef = collection(db, "users/");
+  const docRef = doc(db, "users", userUid);
   try {
-    const doc = await addDoc(collectionRef, {
+    const doc = await setDoc(docRef, {
       userUid: userUid,
       fullName: formData.fullName,
       email: formData.email,
@@ -29,10 +31,10 @@ export const addUser = async (formData: UserInformation, userUid: string) => {
   }
 };
 
-export const getUser = async (userUid: string) => {
-  const docRef = doc(db, "users", userUid);
+export const getUser = async (uid: string) => {
+  const collectionRef = collection(db, "users/");
   try {
-    const document = await getDoc(docRef);
+    const document = await getDoc(doc(collectionRef, uid));
     return document.data();
   } catch (error) {
     console.error(error);
@@ -62,7 +64,6 @@ export const addArticle = async (article: Article) => {
   try {
     const document = await addDoc(collectionRef, {
       title: article.title,
-      description: article.description,
       content: article.content,
       timeToRead: article.timeToRead,
       tags: article.tags,
@@ -97,12 +98,14 @@ export const getArticles = async () => {
   const collectionRef = collection(db, "articles");
   try {
     const documents = await getDocs(collectionRef);
-    const articles = documents.docs.map((doc) => { return doc.data()});
+    const articles = documents.docs.map((doc) => {
+      return doc.data();
+    });
     return articles;
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export const getCategories = async () => {
   const collectionRef = collection(db, "categories");
@@ -117,7 +120,7 @@ export const getCategories = async () => {
   }
 };
 
-export const getCategory = async (categoryDocId:string) => {
+export const getCategory = async (categoryDocId: string) => {
   const collectionRef = collection(db, "categories");
   try {
     const document = await getDoc(doc(collectionRef, categoryDocId));
@@ -145,7 +148,9 @@ export const search = async (q: string) => {
   const searchResult = query(collectionRef, where("title", "==", q));
   try {
     const documents = await getDocs(searchResult);
-    const articles = documents.docs.map((doc) => { return doc.data()});
+    const articles = documents.docs.map((doc) => {
+      return doc.data();
+    });
     return articles;
   } catch (error) {
     console.error(error);
@@ -167,7 +172,7 @@ export const getArticlesByTag = async (q: string) => {
 };
 
 export const getArticlesByCategory = async (q: any) => {
-  const collectionRef = collection(db, "articles");
+  const collectionRef = collection(db, "/articles");
   const searchResult = query(collectionRef, where("category", "==", q));
   try {
     const documents = await getDocs(searchResult);
@@ -180,10 +185,10 @@ export const getArticlesByCategory = async (q: any) => {
   }
 };
 
-export const getArticleByDocID = async (articleId: string) => {
-  const docRef = doc(db, "articles", articleId);
+export const getArticleByDocId = async (articleId: string) => {
+  const collectionRef = collection(db, "/articles");
   try {
-    const document = await getDoc(docRef);
+    const document = await getDoc(doc(collectionRef, articleId));
     return document.data();
   } catch (error) {
     console.error(error);

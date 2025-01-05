@@ -57,7 +57,7 @@ export default function AvatarImage({ getImageUrl }: AvatarImageProps) {
         }}
       >
         <Image
-          className="block rounded-full shadow-xl mx-auto h-32 w-32 object-cover"
+          className="block rounded-full shadow-xl mx-auto h-20 w-20 object-cover"
           src={imageUrl === "" ? "/user.png" : imageUrl}
           width={300}
           height={300}

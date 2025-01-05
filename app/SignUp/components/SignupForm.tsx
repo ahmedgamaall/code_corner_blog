@@ -1,8 +1,10 @@
 "use client";
 
-import FilledButton from "@/app/components/FilledButton";
+import FilledSubmitButton from "@/app/components/FilledSubmitButton";
 import InputField from "@/app/components/InputField";
 import LabelButton from "@/app/components/LabelButton";
+import Dialog from "@/app/writearticle/components/Dialog";
+import LoadingBlock from "@/app/writearticle/components/LoadingBlock";
 import { signUp } from "@/services/auth";
 import { addUser } from "@/services/db";
 import { useRouter } from "next/navigation";
@@ -18,6 +20,7 @@ export default function SignupForm() {
   const router = useRouter();
   const [buttonState, setLoading] = useState(registerState.waiting);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [loanInputs, setLoanInputs] = useState({
     fullName: "",
     email: "",
@@ -32,14 +35,13 @@ export default function SignupForm() {
     try {
       const user = await signUp(loanInputs.email, loanInputs.password);
       await addUser(loanInputs, user!.uid);
-      setErrorMessage(
-        "Account created successfully, Please Verify your email address"
-      );
       setLoading(registerState.done);
+      setShowModal(true);
       router.push("/signin");
     } catch (error: any) {
       setErrorMessage(error.message);
       setLoading(registerState.waiting);
+      setShowModal(true);
     }
   };
 
@@ -67,7 +69,7 @@ export default function SignupForm() {
       />
       <InputField
         label="Job title"
-        value={loanInputs.password}
+        value={loanInputs.jobTitle}
         type="job title"
         placeholder="Enter your job title"
         onChange={(event) =>
@@ -104,7 +106,7 @@ export default function SignupForm() {
 
       <div className="pt-5">
         {buttonState === registerState.waiting ? (
-          <FilledButton title="Register" />
+          <FilledSubmitButton title="Register" />
         ) : buttonState === registerState.done ? (
           <LabelButton
             buttonTitle="Go to gmail"
@@ -112,12 +114,15 @@ export default function SignupForm() {
             href="https://mail.google.com/mail/"
           />
         ) : (
-          <div className="mx-auto h-20 w-20 object-cover bg-slate-600">
-            Loading
-          </div>
+          <LoadingBlock />
         )}
       </div>
       {errorMessage && <div className="pt-5 text-red-600">{errorMessage}</div>}
+      <Dialog
+        errorMessage={errorMessage}
+        isVisible={showModal}
+        successMessage="The Article Has Been Posted Successfully"
+      />
     </form>
   );
 }

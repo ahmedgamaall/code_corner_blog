@@ -2,9 +2,8 @@ import { getCategories } from "@/services/db";
 import CategoryCard from "./CategoryCard";
 
 export default async function CategoryGrid() {
-      const categories = await getCategories();
-  
-      const categoriesComponent = categories.map((category) => {
+      const categories : any = await getCategories();
+      const categoriesComponent = categories.map((category :any) => {
         return (
           <CategoryCard
             categoryDocId={category.categoryDocId}
