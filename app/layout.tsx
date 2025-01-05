@@ -1,6 +1,6 @@
+import { AppWrapper } from "./context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { AppWrapper } from "./context";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,7 +12,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 export const metadata: Metadata = {
   title: "Code Corner",
   description: "Code Corner Blog",
