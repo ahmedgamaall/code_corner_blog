@@ -15,7 +15,7 @@ export default async function CategoryBodySection({
       {articles ? (
         <ArticlesGrid articles={articles} />
       ) : (
-        <div className="mb-8 font-bold text-3xl">
+        <div className="mb-20 mt-10 font-bold text-3xl text-slate-800">
           There is no articles in this category
         </div>
       )}

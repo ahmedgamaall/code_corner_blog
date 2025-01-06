@@ -8,7 +8,7 @@ export default async function categoryDocId(props: any) {
   const category : any = await getCategory(props.params.categoryDocId);
 
   return (
-    <div className="flex flex-col w-full items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col w-full items-center justify-items-center">
       <NavBar />
       <CategoryHeroSection
         categoryDocId={category.categoryDocId}

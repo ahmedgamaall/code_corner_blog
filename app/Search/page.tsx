@@ -1,8 +1,6 @@
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/NavBar";
 import AboutBodySection from "./components/SearchBodySection";
-import AboutMeHeroSection from "./components/SearchHeroSection";
-import SearchResults from "./components/SearchResults";
 
 export default function Search() {
   return (
