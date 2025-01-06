@@ -34,6 +34,7 @@ export default function SignupForm() {
     setLoading(registerState.loading);
     try {
       const user = await signUp(loanInputs.email, loanInputs.password);
+                localStorage.setItem("uid", user?.uid);
       await addUser(loanInputs, user!.uid);
       setLoading(registerState.done);
       setShowModal(true);

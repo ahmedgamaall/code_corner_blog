@@ -4,6 +4,7 @@ import BorderedInputField from "@/app/components/BorderedInputField";
 import FilledButton from "@/app/components/FilledButton";
 import { useState } from "react";
 import TextArea from "../../components/TextArea";
+import FilledSubmitButton from "@/app/components/FilledSubmitButton";
 
 export default function ContactMeBodySection() {
   const [loading, setLoading] = useState(false);
@@ -79,7 +80,7 @@ export default function ContactMeBodySection() {
         />
         <div className="pt-5">
           {!loading ? (
-            <FilledButton title="Send" />
+            <FilledSubmitButton title="Send" />
           ) : (
             <div className="mx-auto h-20 w-20 object-cover bg-slate-600">
               Loading

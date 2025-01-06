@@ -16,7 +16,6 @@ export const signUp = async (email: string, password: string) => {
       password
     );
     // sendEmailVerification(userCredential.user);
-    localStorage.setItem("uid", userCredential.user!.uid);
     return userCredential.user;
   } catch (error) {
     console.error(error);
@@ -30,7 +29,6 @@ export const signIn = async (email: string, password: string) => {
       email,
       password
     );
-    localStorage.setItem("uid", userCredential.user!.uid);
     return userCredential.user;
   } catch (error) {
     return error;

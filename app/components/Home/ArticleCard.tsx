@@ -26,9 +26,13 @@ export default function ArticleCard({
   return (
     <Link
       href={isHome ? `articles/${articleDocId}` : `../articles/${articleDocId}`}
+      key={articleDocId}
     >
       <div className="flex flex-row space-x-0 space-y-5 md:space-x-5 md:space-y-0 w-full">
-        <div className="bg-slate-100 hover:bg-orange-100 flex flex-col p-4 rounded-lg space-y-2 border border-slate-200 items-center drop-shadow-sm shadow-md shadow-slate-400">
+        <div
+          key={articleDocId}
+          className="bg-slate-100 hover:bg-orange-100 flex flex-col p-4 rounded-lg space-y-2 border border-slate-200 items-center drop-shadow-sm shadow-md shadow-slate-400"
+        >
           <img
             src={coverImage}
             alt={articleDocId}
@@ -43,7 +47,7 @@ export default function ArticleCard({
           <p className="leading-5 text-sm text-slate-700">
             {content.substring(0, 200)}...
           </p>
-        </div>{" "}
+        </div>
       </div>
     </Link>
   );

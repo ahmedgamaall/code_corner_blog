@@ -5,6 +5,7 @@ import FilledSubmitButton from "@/app/components/FilledSubmitButton";
 import InputField from "@/app/components/InputField";
 import LoadingBlock from "@/app/components/LoadingBlock";
 import { signIn } from "@/services/auth";
+import { User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -23,6 +24,7 @@ export default function SigninForm() {
     setLoading(true);
     try {
       const user = await signIn(loanInputs.email, loanInputs.password);
+          localStorage.setItem("uid", user?.uid);
       setLoading(false);
       setShowModal(true);
       router.push("/");
