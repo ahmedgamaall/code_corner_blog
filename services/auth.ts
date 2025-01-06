@@ -16,7 +16,7 @@ export const signUp = async (email: string, password: string) => {
       password
     );
     // sendEmailVerification(userCredential.user);
-    return userCredential.user;
+    return userCredential.user.uid;
   } catch (error) {
     console.error(error);
   }
@@ -29,7 +29,7 @@ export const signIn = async (email: string, password: string) => {
       email,
       password
     );
-    return userCredential.user;
+    return userCredential.user.uid;
   } catch (error) {
     return error;
   }

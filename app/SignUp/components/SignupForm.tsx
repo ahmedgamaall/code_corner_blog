@@ -33,9 +33,9 @@ export default function SignupForm() {
   const onSubmit = async () => {
     setLoading(registerState.loading);
     try {
-      const user = await signUp(loanInputs.email, loanInputs.password);
-                localStorage.setItem("uid", user?.uid);
-      await addUser(loanInputs, user!.uid);
+      const uid = await signUp(loanInputs.email, loanInputs.password);
+      localStorage.setItem("uid", uid ?? "");
+      await addUser(loanInputs, uid ?? "");
       setLoading(registerState.done);
       setShowModal(true);
       router.push("/signin");
