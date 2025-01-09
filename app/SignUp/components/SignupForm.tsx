@@ -122,7 +122,7 @@ export default function SignupForm() {
       <Dialog
         errorMessage={errorMessage}
         isVisible={showModal}
-        successMessage="The Article Has Been Posted Successfully"
+        successMessage="The Your Account Created Successfully"
       />
     </form>
   );

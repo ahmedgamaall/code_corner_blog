@@ -145,13 +145,12 @@ export const getTags = async () => {
 
 export const search = async (q: string) => {
   const collectionRef = collection(db, "articles");
-  const searchResult = query(collectionRef, where("title", "==", q));
   try {
-    const documents = await getDocs(searchResult);
-    const articles = documents.docs.map((doc) => {
-      return doc.data();
-    });
-    return articles;
+    const documents = await getDocs(collectionRef);
+    const filteredResults = documents.docs.filter((doc) =>
+      doc.data().title.toLowerCase().includes(q.toLowerCase())
+    );
+    return filteredResults;
   } catch (error) {
     console.error(error);
   }

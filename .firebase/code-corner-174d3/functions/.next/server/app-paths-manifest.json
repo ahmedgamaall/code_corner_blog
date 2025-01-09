@@ -1,0 +1,14 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/categories/[categoryDocId]/page": "app/categories/[categoryDocId]/page.js",
+  "/aboutme/page": "app/aboutme/page.js",
+  "/search/page": "app/search/page.js",
+  "/categories/page": "app/categories/page.js",
+  "/articles/[articleDocId]/page": "app/articles/[articleDocId]/page.js",
+  "/contactme/page": "app/contactme/page.js",
+  "/page": "app/page.js",
+  "/writearticle/page": "app/writearticle/page.js",
+  "/signin/page": "app/signin/page.js",
+  "/signup/page": "app/signup/page.js"
+}

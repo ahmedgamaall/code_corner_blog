@@ -10,11 +10,11 @@ export default async function HomeBodySection() {
       <h3 className="text-slate-800 font-bold text-2xl mt-2">
         Popular Articles
       </h3>
-      <ArticlesGrid articles={popularArticles} />
+      <ArticlesGrid key="Popular" articles={popularArticles} />
       <h3 className="text-slate-800 font-bold text-2xl mt-2">
         Resent Articles
       </h3>
-      <ArticlesGrid articles={resentArticles} />
+      <ArticlesGrid key="Resent" articles={resentArticles} />
     </div>
   );
 }

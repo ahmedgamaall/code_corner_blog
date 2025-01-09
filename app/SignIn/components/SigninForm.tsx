@@ -67,7 +67,7 @@ export default function SigninForm() {
       <Dialog
         errorMessage={errorMessage}
         isVisible={showModal}
-        successMessage="The Article Has Been Posted Successfully"
+        successMessage="The Login Successfully"
       />
     </form>
   );

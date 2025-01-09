@@ -13,7 +13,7 @@ export default async function CategoryBodySection({
   return (
     <div className="mt-6 mb-10">
       {articles ? (
-        <ArticlesGrid articles={articles} />
+        <ArticlesGrid key="Category" articles={articles} />
       ) : (
         <div className="mb-20 mt-10 font-bold text-3xl text-slate-800">
           There is no articles in this category
